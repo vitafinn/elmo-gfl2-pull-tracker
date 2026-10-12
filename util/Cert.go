@@ -46,8 +46,8 @@ func GenCA() error {
 	template := x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			CommonName:   "Elmo Archive Local Capture CA",
-			Organization: []string{"Elmo Archive"},
+			CommonName:   "Elmo Pull Tracker Local Capture CA",
+			Organization: []string{"Elmo Pull Tracker"},
 		},
 		NotBefore:             time.Now(),
 		NotAfter:              time.Now().AddDate(20, 0, 0),
@@ -161,6 +161,11 @@ type CaptureCertificate struct {
 	Legacy     bool
 }
 
+func knownCaptureCertificateName(name string) bool {
+	// Recognize certificates already installed by earlier releases for safe removal.
+	return name == "Elmo Pull Tracker Local Capture CA" || name == "Elmo Archive Local Capture CA" || name == "ElmoBeacon Custom CA"
+}
+
 func certificateDetails(cert *x509.Certificate) CaptureCertificate {
 	// SHA-1 is used only to match Windows' displayed identifier, not for signing.
 	sum := sha1.Sum(cert.Raw)
@@ -170,7 +175,7 @@ func certificateDetails(cert *x509.Certificate) CaptureCertificate {
 		groups = append(groups, hex[i:i+8])
 	}
 	directory, _ := filepath.Abs(".")
-	return CaptureCertificate{Directory: directory, Name: cert.Subject.CommonName, Thumbprint: strings.Join(groups, " "), Legacy: cert.Subject.CommonName == "ElmoBeacon Custom CA"}
+	return CaptureCertificate{Directory: directory, Name: cert.Subject.CommonName, Thumbprint: strings.Join(groups, " "), Legacy: knownCaptureCertificateName(cert.Subject.CommonName) && cert.Subject.CommonName != "Elmo Pull Tracker Local Capture CA"}
 }
 
 func ensureLocalCertificate() (*tls.Certificate, error) {

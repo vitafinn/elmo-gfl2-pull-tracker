@@ -31,7 +31,7 @@ func main() {
 
 	// Create application with options
 	err = wails.Run(&options.App{
-		Title:     "Elmo Archive",
+		Title:     "Elmo Pull Tracker",
 		Width:     1600,
 		Height:    900,
 		Frameless: true,

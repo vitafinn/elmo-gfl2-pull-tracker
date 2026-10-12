@@ -11,7 +11,7 @@ const template=parse(source).descriptor.template.content
 const render=new Function('Vue',compile(template,{mode:'function',prefixIdentifiers:true}).code)(Vue)
 async function dialog(state={}) {
  const app=Vue.createSSRApp({render,setup:()=>({
-  security:{busy:false},visible:true,active:false,starting:false,stopping:false,error:'',invalidUid:false,
+  security:{busy:false,removeAfterImport:true},setCleanup:()=>{},visible:true,active:false,starting:false,stopping:false,error:'',invalidUid:false,
   certificate:null,checkingCertificate:false,installingCertificate:false,installCertificate:()=>{},FocusCertificatePrompt:()=>{},mode:'manual',uid:'',beforeClose:()=>{},start:()=>{},stop:()=>{},
   flow:{captured:false,busy:false,preparing:false,confirming:false,error:'',result:''},...state
  })})
@@ -47,12 +47,17 @@ test('completed capture visibly shows the ready state',async()=>{
 
 
 test('certificate review shows identity before opening Windows and explains hidden prompt',async()=>{
- const cert={Name:'Elmo Archive Local Capture CA',Thumbprint:'12345678 ABCDEF00',Trusted:false,Legacy:false}
+ const cert={Name:'Elmo Pull Tracker Local Capture CA',Thumbprint:'12345678 ABCDEF00',Trusted:false,Legacy:false}
  const review=await dialog({certificate:cert})
- assert.match(review,/Elmo Archive Local Capture CA/)
+ assert.match(review,/Elmo Pull Tracker Local Capture CA/)
  assert.match(review,/12345678 ABCDEF00/)
  assert.match(review,/certificate.compare/)
  assert.match(review,/certificate.install/)
+ const main=review.replace(/<details[\s\S]*?<\/details>/g,'')
+ assert.match(main,/certificate.permission/)
+ assert.match(main,/certificate.install/)
+ assert.match(main,/<input[^>]*checked/)
+ assert.doesNotMatch(main,/12345678 ABCDEF00|certificate.files/)
  assert.doesNotMatch(review,/guide.identify/)
  const pending=await dialog({certificate:cert,installingCertificate:true})
  assert.match(pending,/certificate.showPrompt/)

@@ -10,7 +10,7 @@ about: Report a problem with the release
 ## Steps to reproduce
 
 ## Environment
-- Elmo Archive version:
+- Elmo Pull Tracker version:
 - Windows version:
 - Publisher/region (Darkwinter or Haoplay region):
 - Language:

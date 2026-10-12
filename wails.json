@@ -1,7 +1,7 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "Elmo Archive",
-  "outputfilename": "ElmoArchive",
+  "name": "Elmo Pull Tracker",
+  "outputfilename": "ElmoPullTracker",
   "frontend:install": "npm ci",
   "frontend:build": "npm run build",
   "frontend:dev:watcher": "npm run dev",
@@ -12,7 +12,7 @@
   },
   "info": {
     "companyName": "vitafinn",
-    "productName": "Elmo Archive",
+    "productName": "Elmo Pull Tracker",
     "productVersion": "",
     "copyright": "Copyright (c) 2024 MccWiki",
     "comments": "Girls’ Frontline 2: Exilium pull tracker — independently maintained fork"

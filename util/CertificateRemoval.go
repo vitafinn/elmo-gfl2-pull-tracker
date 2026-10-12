@@ -93,7 +93,7 @@ func RemoveReviewedCaptureCertificate(thumbprint string) error {
 	if err != nil {
 		return err
 	}
-	if !cert.IsCA || (cert.Subject.CommonName != "Elmo Archive Local Capture CA" && cert.Subject.CommonName != "ElmoBeacon Custom CA") || certificateDetails(cert).Thumbprint != thumbprint {
+	if !cert.IsCA || !knownCaptureCertificateName(cert.Subject.CommonName) || certificateDetails(cert).Thumbprint != thumbprint {
 		return errors.New("certificate identity changed or is not this app's certificate; review it again")
 	}
 	store, err := openCertStore()
