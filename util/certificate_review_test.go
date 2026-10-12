@@ -12,7 +12,7 @@ func TestCertificateReviewKeepsTheSameLocalIdentity(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if first.Name != "Elmo Archive Local Capture CA" || first.Legacy || first.Trusted {
+	if first.Name != "Elmo Tracker Local Capture CA" || first.Legacy || first.Trusted {
 		t.Fatalf("unexpected new identity: %+v", first)
 	}
 	if len(strings.ReplaceAll(first.Thumbprint, " ", "")) != 40 {

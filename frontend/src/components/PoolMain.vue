@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref,computed,watch} from 'vue';
+import RecordSearch from './RecordSearch.vue';
+import {matchesRecord} from '../utils/recordSearch';
 import {handler} from '../../wailsjs/go/models';
 import CharacterDetails from './CharacterDetails.vue';
 import {usePoolStore} from "../store/poolStore.ts";
@@ -14,13 +16,16 @@ const poolStore = usePoolStore()
 const users = useUserStore()
 const flow = useImportStore()
 const selectedRecord = ref<handler.DisplayRecord|null>(null)
+const query = ref('')
+const matchingRecords = computed(() => (poolStore.poolInfo?.recordList || []).filter(record => matchesRecord(query.value,record.Name,record.SearchNames)))
+watch(()=>[users.userId,poolStore.poolType],()=>{query.value=''})
 
 </script>
 
 <template>
   <div class="flex flex-col gap-6">
     <section v-if="!users.userId" class="welcome-panel">
-      <p class="eyebrow">Elmo Archive · Girls’ Frontline 2: Exilium</p>
+      <p class="eyebrow">Elmo Tracker · Girls’ Frontline 2: Exilium</p>
       <h1>{{ $t('guide.welcome') }}</h1>
       <p>{{ $t('guide.welcomeBody') }}</p>
       <ol><li>{{ $t('guide.welcome1') }}</li><li>{{ $t('guide.welcome2') }}</li><li>{{ $t('guide.welcome3') }}</li></ol>
@@ -34,7 +39,7 @@ const selectedRecord = ref<handler.DisplayRecord|null>(null)
     <OutfitStats v-if="poolStore.outfitInfo" :info="poolStore.outfitInfo"/>
     <template v-else-if="poolStore.poolInfo">
       <p v-if="!poolStore.poolInfo.totalCount" class="help-panel">{{ $t('guide.noRecords') }}</p>
-      <SelectorStats v-if="[6,7,-6,-7].includes(poolStore.poolType)" :info="poolStore.poolInfo" @select="selectedRecord=$event"/>
+      <SelectorStats v-if="[6,7,-6,-7].includes(poolStore.poolType)" :key="users.userId+':'+poolStore.poolType" :info="poolStore.poolInfo" @select="selectedRecord=$event"/>
       <template v-else>
       <div class="stats-grid">
         <PoolStatistic class="text-gray-50" :title="$t('gacha.statistic.totalCount')" :value="poolStore.poolInfo.totalCount"/>
@@ -58,9 +63,11 @@ const selectedRecord = ref<handler.DisplayRecord|null>(null)
       </div>
 
       <p class="text-sm text-slate-400">{{ $t('character.recordsHint') }}</p>
+      <RecordSearch v-model="query" :count="matchingRecords.length"/>
+      <p v-if="query && !matchingRecords.length" class="empty-state">{{ $t('dashboard.noMatches') }}</p>
       <el-scrollbar>
         <div class="record-grid">
-          <PoolRecord v-for="record in poolStore.poolInfo.recordList" :key="record.ID" :record="record" @select="selectedRecord=$event"/>
+          <PoolRecord v-for="record in matchingRecords" :key="record.ID" :record="record" @select="selectedRecord=$event"/>
         </div>
       </el-scrollbar>
       </template>

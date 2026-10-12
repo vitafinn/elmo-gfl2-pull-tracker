@@ -22,7 +22,7 @@ for(const name of ['zh-CN','zh-TW']) {
    const params=text=>[...text.matchAll(/\{(\w+)\}/g)].map(match=>match[1]).sort()
    assert.deepEqual(params(translated[key]),params(value),`parameters differ in ${key}`)
    // Publisher brand names remain unchanged in every language.
-   if(key==='window.title') assert.equal(translated[key],'Elmo Archive')
+   if(key==='window.title') assert.equal(translated[key],'Elmo Tracker')
    else if(key==='server.us') assert.equal(translated[key],'Darkwinter')
    else assert.match(translated[key],/[\u3400-\u9fff]/,`untranslated ${key}`)
   }

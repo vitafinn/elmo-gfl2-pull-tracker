@@ -1,33 +1,9 @@
-# Elmo Archive 0.2.0
+# Elmo Tracker 0.2.3
 
-A Windows pull tracker for Girls’ Frontline 2: Exilium, forked from [MatchaCabin/ElmoBeacon](https://github.com/MatchaCabin/ElmoBeacon).
+A Windows gacha pull tracker for **Girls’ Frontline 2: Exilium (GFL2 / GF2)**. A fork of [ElmoBeacon](https://github.com/MatchaCabin/ElmoBeacon).
 
-The feature set is complete for this edition. Future maintenance is limited to bug fixes and compatibility changes when needed; no feature roadmap or regular update schedule is planned.
+Import procurement history and view banner pity, doll and weapon copy costs, and outfit access records. English and Chinese interfaces are included. Capture is built in; no Fiddler or separate capture tool is needed.
 
-## Certificate controls
+Download **ElmoTracker-0.2.3-windows-x64.zip**, extract it, and run `ElmoTracker.exe`. Before updating, close the app, back up `ElmoBeacon.db`, and put the new EXE in the same app folder.
 
-Certificate trust is removed after a successful import by default. Manual removal is available in Import records, and stops active capture first. Existing valid connections can sync without reinstalling. HTTPS capture is limited to explicit hosts and verifies upstream TLS. Removal errors are shown separately from import results.
-
-## Included
-
-- Custom and Reunion procurement with separate banner pity.
-- Outfit access records by season.
-- Copy costs with linked losses, signature weapons, and V/R milestones.
-- Approximate chart-based luck comparisons with readable explanations.
-- English and Chinese UI, clearer import steps, and account confirmation.
-- Manual game UID and Darkwinter-only webshop identification.
-- Visible sync completion and compact target-result editing that preserves your position.
-
-## Install
-
-Download the **windows-x64.zip**, extract it to a writable folder, and run `ElmoArchive.exe`. Requires the Windows game client. If WebView2 is missing, the app offers to download and run Microsoft’s installer. Binaries are unsigned. Updates are available from this repository’s Releases page.
-
-Back up `ElmoBeacon.db` while the app is closed before upgrading. Do not include your database, capture files, certificates, or game logs in public reports.
-
-## Known limitations
-
-Live capture needs region-by-region confirmation. Unknown target outcomes and missing history can affect costs; probability comparisons remain estimates. Imported history is not live inventory. See README for capture/proxy behavior and limitations.
-
-The source ZIP corresponds to this build. SHA256SUMS.txt covers both ZIPs. This is an independently maintained fork under the original GPL v3 license, not an official game product.
-
-Live testing on every publisher/region is not yet complete. Please include your app version and region when reporting a problem.
+The executable is unsigned. Live testing across all regions is not complete. Existing valid capture certificates are reused; certificate trust is removed after successful import by default. Matching source and SHA-256 checksums are included under GPL v3.

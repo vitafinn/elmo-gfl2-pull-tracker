@@ -1,19 +1,21 @@
-# Elmo Archive — 少女前线 2：追放抽卡记录工具
+# Elmo Tracker — 少女前线 2：追放抽卡记录工具
 
-Windows 工具，可查看保底、人形与武器副本花费，以及服装访问记录。
+《少女前线 2：追放》（Girls’ Frontline 2: Exilium，GFL2 / GF2）的 Windows 抽卡记录工具。导入采购（procurement）历史，查看保底、人形与武器副本花费，以及服装访问记录。
 
 本项目是 [ElmoBeacon](https://github.com/MatchaCabin/ElmoBeacon) 的分支（fork）。
 
-[下载](https://github.com/vitafinn/elmo-archive/releases) · [反馈问题](https://github.com/vitafinn/elmo-archive/issues) · [English](../README.md)
+[下载](https://github.com/vitafinn/elmo-tracker-gfl2/releases) · [反馈问题](https://github.com/vitafinn/elmo-tracker-gfl2/issues) · [English](../README.md)
 
 ![卡池总览、保底与抽卡记录](images/overview.png)
 
 ## 安装
 
-需要 Windows x64 和 Windows 游戏客户端。在游戏内打开访问记录，由 Elmo Archive 的内置功能抓取，无需安装 Fiddler 或独立的 mitmproxy。
+需要 Windows x64 和 Windows 游戏客户端。在游戏内打开访问记录，由 Elmo Tracker 的内置功能抓取，无需安装 Fiddler 或独立的 mitmproxy。
 
 1. 在 Releases 下载 **windows-x64.zip**，不要选择“Source code”。若 Releases 为空，表示尚未公开发布。
-2. 解压到可写文件夹，运行 `ElmoArchive.exe`。
+2. 解压到可写文件夹，运行 `ElmoTracker.exe`。
+
+**更新：** 关闭旧程序，备份 `ElmoBeacon.db`，将新 EXE 放进原程序文件夹。记录和设置会保留。
 
 缺少 WebView2 时，软件会提示下载并运行微软安装程序，需要联网。只有自动安装失败时才需要[手动下载](https://developer.microsoft.com/en-us/microsoft-edge/webview2/)。
 
@@ -23,7 +25,7 @@ Windows 工具，可查看保底、人形与武器副本花费，以及服装访
 
 1. 打开游戏并登录。
 2. 在软件中选择“导入记录”，使用手动 UID 方式，填写游戏个人资料中的 UID。
-3. 开始连接。如果出现证书设置，请核对软件与 Windows 提示中的名称和指纹。只有内容一致且你信任软件时才选择“是”。窗口被遮挡时，可点击“显示 Windows 确认窗口”。
+3. 开始连接。如果出现设置页面，阅读简短说明并选择“继续，打开 Windows 提示”。核对提示中的证书名称与软件显示的一致，然后选择“是”允许抓取，或“否”取消。
 4. 在游戏中打开正在进行的卡池 → 详情 → 侧边的“访问记录”。如果已经打开，请关闭后重新打开。无需抽卡或购买。
 5. 软件显示历史连接就绪后，选择“同步记录”。核对 UID 和区服，再确认导入。等待“同步完成”。
 

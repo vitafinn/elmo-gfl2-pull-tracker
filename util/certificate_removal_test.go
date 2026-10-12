@@ -24,7 +24,7 @@ func TestRemovalTouchesOnlyExactCertificateInMemory(t *testing.T) {
 	}
 	certs := make([]*x509.Certificate, 2)
 	for i := range certs {
-		template := &x509.Certificate{SerialNumber: big.NewInt(int64(i + 1)), Subject: pkix.Name{CommonName: "Elmo Archive Local Capture CA"}, NotBefore: time.Now(), NotAfter: time.Now().Add(time.Hour), IsCA: true, BasicConstraintsValid: true, KeyUsage: x509.KeyUsageCertSign}
+		template := &x509.Certificate{SerialNumber: big.NewInt(int64(i + 1)), Subject: pkix.Name{CommonName: "Elmo Tracker Local Capture CA"}, NotBefore: time.Now(), NotAfter: time.Now().Add(time.Hour), IsCA: true, BasicConstraintsValid: true, KeyUsage: x509.KeyUsageCertSign}
 		der, err := x509.CreateCertificate(rand.Reader, template, template, &key.PublicKey, key)
 		if err != nil {
 			t.Fatal(err)
@@ -79,5 +79,20 @@ func TestRemovalRejectsChangedReview(t *testing.T) {
 	}
 	if err := RemoveReviewedCaptureCertificate("wrong thumbprint"); err == nil {
 		t.Fatal("accepted wrong identity")
+	}
+}
+
+func TestCaptureCertificateNamesKeepEarlierTrustRemovable(t *testing.T) {
+	for _, name := range []string{"Elmo Tracker Local Capture CA", "Elmo Pull Tracker Local Capture CA", "Elmo Archive Local Capture CA", "ElmoBeacon Custom CA"} {
+		if !knownCaptureCertificateName(name) {
+			t.Fatalf("cannot remove known certificate %q", name)
+		}
+		cert := &x509.Certificate{Subject: pkix.Name{CommonName: name}}
+		if certificateDetails(cert).Legacy != (name != "Elmo Tracker Local Capture CA") {
+			t.Fatalf("incorrect legacy label for %q", name)
+		}
+	}
+	if knownCaptureCertificateName("Unrelated CA") {
+		t.Fatal("unrelated certificate accepted")
 	}
 }

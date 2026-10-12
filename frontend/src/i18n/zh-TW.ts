@@ -2,7 +2,7 @@ import extra from './zh-TW-extra'
 export default {
     ...extra,
     window: {
-        title: "Elmo Archive"
+        title: "Elmo Tracker"
     },
     server: {
         cn: '陸服',

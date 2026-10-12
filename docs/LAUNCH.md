@@ -1,6 +1,6 @@
 # Release maintenance
 
-Elmo Archive is a personally maintained fork of ElmoBeacon. Keep upstream history, copyright notices, and GPL v3 licensing. No feature roadmap or regular release schedule is planned.
+Elmo Tracker is a personally maintained fork of ElmoBeacon. Keep upstream history, copyright notices, and GPL v3 licensing. No feature roadmap or regular release schedule is planned.
 
 ## Publish an update
 
@@ -19,4 +19,4 @@ The workflow builds the app with the selected version and this repository's Rele
 - List untested regions honestly. Do not mark Haoplay paths tested without a live test.
 - Check package contents and screenshots for private information.
 
-Use the separate publishing checkout under `build/publish/elmo-archive`. It retains the upstream history. Do not use the earlier fresh-history snapshot or force-push over published commits.
+Use the separate publishing checkout under the separate publishing checkout under `build/publish`. It retains the upstream history. Do not use the earlier fresh-history snapshot. Keep published release tags and their source commits intact.

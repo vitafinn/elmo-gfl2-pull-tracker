@@ -1,4 +1,4 @@
-# Elmo Archive — detailed guide
+# Elmo Tracker — detailed guide
 
 [Quick start](../README.md) · [中文说明](README.zh-CN.md)
 
@@ -12,7 +12,7 @@ The old generated-local-ID import option is no longer offered to new imports. Ex
 
 Capture temporarily uses a local HTTPS proxy and a certificate trusted for the current Windows user. Before installation, compare the name and thumbprint shown in the app with the Windows confirmation. Windows cannot independently validate this local CA; the warning remains visible. A matching thumbprint identifies the certificate, not the publisher. The app decrypts only explicitly listed game record hosts, plus the Darkwinter webshop API in webshop mode. Other HTTPS traffic is tunneled without decryption. Upstream TLS certificates are verified. These host limits are enforced by the app; Windows root trust itself is broader. The app shows the certificate folder during setup. `ca.crt` is the public certificate; `ca.key` is its private signing key. Keep the key private and do not attach it to bug reports.
 
-**Remove after a successful import** is on by default. You can also open **Import records → Capture & certificate → Remove certificate trust** at any time. Removal stops capture, restores the previous proxy settings, and removes only the matching certificate from the current user’s root store. It keeps your records and local certificate files. A valid saved connection can sync without this certificate; a new capture requires installation again. If import fails or is cancelled, use the manual removal button. Other app copies or certificate stores may require separate removal through certmgr.msc. New certificates use **Elmo Archive Local Capture CA**; valid older **ElmoBeacon Custom CA** files retain their name and thumbprint.
+**Remove certificate trust after a successful import** is on by default. You can also open **Import records → Capture settings → Remove certificate trust** at any time. Removal stops capture, restores the previous proxy settings, and removes only the matching certificate from the current user’s root store. It keeps your records and local certificate files. A valid saved connection can sync without this certificate; a new capture requires installation again. If import fails or is cancelled, use the manual removal button. Other app copies or certificate stores may require separate removal through certmgr.msc. New certificates use **Elmo Tracker Local Capture CA**; valid certificates from earlier versions retain their identity.
 
 Records are stored in `ElmoBeacon.db` in the app’s working folder. Connection files can contain session credentials. **Do not upload databases, game logs, capture URLs, tokens, `gacha_session_info.json`, `gacha_auth_details.json`, or `ca.key` in bug reports.** Crop or redact UIDs from screenshots.
 
@@ -41,7 +41,7 @@ node --test frontend/tests/*.test.mjs
 go test ./...
 wails dev
 # Production build:
-wails build -o ElmoArchive.exe
+wails build -o ElmoTracker.exe
 ```
 
 The executable is written to `build/bin/`. Run `node scripts/release-preflight.mjs` before publishing source. See [launch preparation](LAUNCH.md) for release packaging, repository discovery, and the remaining live checks.

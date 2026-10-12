@@ -1,6 +1,6 @@
 export default {
     window: {
-        title: "Elmo Archive"
+        title: "Elmo Tracker"
     },
     server:{
         cn:'China',

@@ -31,7 +31,7 @@ type ImportProgress struct {
 
 func SyncRecords(gameUserInfo *GameUserInfo, callbacks ...func(ImportProgress)) (*SyncResult, error) {
 	if gameUserInfo.GameServer == GameServerCN {
-		return nil, errors.New("the China client is not supported by Elmo Archive")
+		return nil, errors.New("the China client is not supported by Elmo Tracker")
 	}
 	progress := func(stage string, pool int64, page, count int) {
 		for _, callback := range callbacks {

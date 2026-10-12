@@ -1,19 +1,21 @@
-# Elmo Archive — GFL2 pull tracker
+# Elmo Tracker — GFL2: Exilium Pull Tracker
 
-A Windows pull tracker for **Girls’ Frontline 2: Exilium**. View pity, doll and weapon copy costs, and outfit records.
+A Windows gacha pull tracker for **Girls’ Frontline 2: Exilium (GFL2 / GF2)**. Import your procurement history, then view banner pity, doll and weapon copy costs, and outfit records.
 
 A fork of [ElmoBeacon](https://github.com/MatchaCabin/ElmoBeacon).
 
-[Download](https://github.com/vitafinn/elmo-archive/releases) · [Report a bug](https://github.com/vitafinn/elmo-archive/issues) · [中文说明](docs/README.zh-CN.md)
+[Download](https://github.com/vitafinn/elmo-tracker-gfl2/releases) · [Report a bug](https://github.com/vitafinn/elmo-tracker-gfl2/issues) · [中文说明](docs/README.zh-CN.md)
 
-![Procurement overview with pity and pull history](docs/images/overview.png)
+![Elmo Tracker showing GFL2 procurement history, banner pity, and pull results](docs/images/overview.png)
 
 ## Install
 
-Requires **Windows x64** and the **Windows game client**. Open Access Record inside the game. Capture is built into Elmo Archive; no Fiddler or separate mitmproxy installation is needed.
+Requires **Windows x64** and the **Windows game client**. Open Access Record inside the game. Capture is built into Elmo Tracker; no Fiddler or separate mitmproxy installation is needed.
 
-1. Download the **windows-x64.zip** from Releases. Do not choose “Source code.” If Releases is empty, no public build is available yet.
-2. Extract the ZIP to a folder you can write to. Run `ElmoArchive.exe`.
+1. Download the **windows-x64.zip** from Releases. Do not choose “Source code.”
+2. Extract the ZIP to a folder you can write to. Run `ElmoTracker.exe`.
+
+**Updating:** close it, back up `ElmoBeacon.db`, then put the new EXE in the same app folder. Your records and settings stay in place.
 
 If WebView2 is missing, the app offers to download and run Microsoft's installer. It needs an internet connection. [Manual download](https://developer.microsoft.com/en-us/microsoft-edge/webview2/) is only a fallback.
 
@@ -22,8 +24,8 @@ The executable is unsigned. Darkwinter and Haoplay (Global, Asia, Japan, Korea) 
 ## Import records
 
 1. Open the game and sign in.
-2. In Elmo Archive, select **Import records → My game UID**. Enter the UID from your game profile.
-3. Select **Connect to game history**. If certificate setup appears, compare the displayed name and thumbprint with the Windows prompt. Select **Yes** only if they match and you trust this app. If the prompt is hidden, select **Show Windows prompt**.
+2. In Elmo Tracker, select **Import records → My game UID**. Enter the UID from your game profile.
+3. Select **Connect to game history**. If setup appears, read the short explanation and select **Continue to Windows**. Check that the Windows prompt names the certificate shown in the app, then select **Yes** to allow capture or **No** to cancel.
 4. In the game, open a running banner → **Details → Access Record** side tab. If Access Record is already open, close and reopen it. No pull or purchase is needed.
 5. When the app says **History connected**, select **Sync records**. Check the UID and region, then confirm. Wait for **Sync complete**.
 
@@ -33,7 +35,7 @@ Darkwinter users can also choose **Darkwinter webshop sign-in**. Follow the app�
 
 ## Certificate and saved data
 
-Capture temporarily uses a local HTTPS proxy and a trusted root certificate. Root trust is a real security permission; read the setup explanation before accepting it. **Remove after a successful import** is on by default. You can also remove trust from **Import records → Capture & certificate**. A valid saved connection can still sync without reinstalling it.
+Capture temporarily uses a local HTTPS proxy and a trusted root certificate. Root trust is a real security permission; read the setup explanation before accepting it. **Remove certificate trust after a successful import** is on by default. You can also remove trust from **Import records → Capture settings**. A valid saved connection can still sync without reinstalling it.
 
 Keep your app folder. Before updating, close the app and back up `ElmoBeacon.db`. Do not share your database, session files, game logs, or `ca.key` (the certificate’s private signing key). The app shows the certificate folder during setup.
 

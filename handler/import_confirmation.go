@@ -46,7 +46,7 @@ func (a *App) PrepareImport(source string) (ImportPreview, error) {
 		return ImportPreview{}, fmt.Errorf("account identifier is missing; reconnect")
 	}
 	if info.GameServer == service.GameServerCN {
-		return ImportPreview{}, fmt.Errorf("the China client is not supported by Elmo Archive")
+		return ImportPreview{}, fmt.Errorf("the China client is not supported by Elmo Tracker")
 	}
 	if info.IdentitySource == "webshop" && string(info.GameServer) != "us" {
 		return ImportPreview{}, fmt.Errorf("Darkwinter webshop cannot identify a Haoplay account; reconnect using its game UID")
